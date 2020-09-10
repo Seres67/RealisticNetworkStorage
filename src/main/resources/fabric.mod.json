@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "realisticnetworkstorage",
+  "version": "${version}",
+  "name": "RealisticNetworkStorage",
+  "description": "This mod adds network storage and other useful machines!",
+  "authors": [
+    "Seres_"
+  ],
+  "contact": {
+    "website": "https://seres67.github.io",
+    "repo": "https://github.com/Seres67/RealisticNetworkStorage"
+  },
+  "license": "MIT",
+  "icon": "assets/realisticnetworkstorage/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.seres.realisticnetworkstorage.RealisticNetworkStorageClient"
+    ],
+    "main": [
+      "com.seres.realisticnetworkstorage.RealisticNetworkStorage"
+    ],
+    "modmenu": [
+      "com.seres.realisticnetworkstorage.client.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "realisticnetworkstorage.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.9.3+build.207",
+    "fabric": "*",
+    "minecraft": "1.16.2"
+  }
+}
