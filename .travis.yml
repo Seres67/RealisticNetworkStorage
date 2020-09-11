@@ -15,6 +15,11 @@ cache:
 before_deploy:
   - git config --local user.name "Seres67"
   - git config --local user.email "laurent.haar@epitech.eu"
+  - export actual_version=$(sed -nE 's/mod_version=([0-9]{1,}\.[0-9]{1,})(\.[0-9x]{1,})$/\1/p' gradle.properties)
+  - export previous_patch=$(git describe --tags --abbrev=0 | sed -E 's/([0-9]{1,}\.[0-9x]{1,}\.[0-9x]{1,})\-()/\2/g')
+  - export previous_version=$(git describe --tags --abbrev=0 | sed -E 's/([0-9]{1,}\.[0-9x]{1,}\.[0-9x]{1,})\-([0-9]{1,}\.[0-9x]{1,})(\.[0-9x]{1,})/\2/g')
+  - if [[ "$actual_version" == "$previous_version" ]]; then export version=$(echo $previous_patch | awk '{printf($1+1)}'); else export version=0; fi
+  - sed -Ei 's/mod_version=([0-9]{1,}\.[0-9]{1,}\.)([0-9x]{1,})$/mod_version=\1$version/g' gradle.properties
   - export TRAVIS_TAG=${realisticnetworkstorage-1.16.2-$(sed -nE 's/mod_version=([0-9]{1,}\.[0-9]{1,}\.[0-9x]{1,})$/\1/p' gradle.properties)}
   - git tag $TRAVIS_TAG
 deploy:
