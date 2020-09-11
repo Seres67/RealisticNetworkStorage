@@ -1,18 +1,22 @@
 language: java
 install: skip
-
 os: linux
 dist: trusty
 jdk: oraclejdk8
-
 script:
-  - ./gradlew build -s
-
+- "./gradlew build -s"
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - "$HOME/.gradle/caches/"
-    - "$HOME/.gradle/wrapper/"
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+deploy:
+  provider: releases
+  api_key:
+    secure: lG0Z9fjTnuoj9hsh1HxYAGUITtE+7XeJB81QaBp6VF3JJPGPuzc6GbQRB+29jdGR3OaNClQU65P3BmQKI59uI5N82xVPFlPRYwFhXwp5UA7oNzsyIS/8jbbgkWHTNOnngC/w3vs+IgG7DUZzmS+RosNpt+PNoB8MNYZQcbW+4bZ83vPtvK8DYd8hdwGsBZumZVRvZyUBgc2aHxCUCo5gqjWJe+zfb66CvsoaHipZeHq3PjGyTehwVkFgGtMp0f01FLi/RFAOY6XlMsTOS0CKZa9Jw+xCgdPTdCM/RTgVrKixDIFFaxK2KvWUImVL969vUTssKMaqYtXCTT8U27bCfcM2jQOpHWzjL0UQT+gyCWa0CHDYdqg2aZ2kj8V97HPHt8cUzp+6g1p5+vV2CfRAt0kiNuf6Cdt8F6c9Kh1Fv2S0hXo2nAPmV+0wprhXbEhJP64iJ6q0IHxWYUJI10HYQp6Cm5k4x+RPTkvu6l34YOcrqnfgV6k5fE4OmQ4X//bXn8dYorkLAkqugSiIBAsjifPpAqikWqaPE/Za4qcEYM09Nxlq1ljyfJjtSwaLiH5SyE8Aley/qmvBkUjmp7ao7mYOtq2B390i/ZWJoLtFxvK3MsKM9Mpot1LYfdBq29IsotE/AGXK9b4raBxqXPp8dp2HV20QH1qY4dFxsFVVApk=
+  file: build/libs/realisticnetworkstorage.jar
+  on:
+    repo: Seres67/RealisticNetworkStorage
+  skip_cleanup: 'true'
