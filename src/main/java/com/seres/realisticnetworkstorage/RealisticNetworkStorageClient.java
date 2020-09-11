@@ -14,4 +14,3 @@ public class RealisticNetworkStorageClient implements ClientModInitializer
         ClientboundPackets.init();
     }
 }
-

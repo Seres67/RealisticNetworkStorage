@@ -1,6 +1,6 @@
 package com.seres.realisticnetworkstorage.blocks;
 
-import com.seres.realisticnetworkstorage.blockentities.BasicEnergyBlockEntity;
+import com.seres.realisticnetworkstorage.energy.BlockEntityEnergyStorage;
 import com.seres.realisticnetworkstorage.energy.EnergyTier;
 import com.seres.realisticnetworkstorage.network.ServerboundPackets;
 import io.netty.buffer.Unpooled;
@@ -16,10 +16,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class BasicEnergyBlock extends Block implements BlockEntityProvider
+public class BasicEnergyStorage extends Block implements BlockEntityProvider
 {
-    private EnergyTier tier;
-    public BasicEnergyBlock(Settings settings, EnergyTier tier)
+    private final EnergyTier tier;
+
+    public BasicEnergyStorage(Settings settings, EnergyTier tier)
     {
         super(settings);
         this.tier = tier;
@@ -29,7 +30,7 @@ public class BasicEnergyBlock extends Block implements BlockEntityProvider
     public void onSteppedOn(World world, BlockPos pos, Entity entity)
     {
         if (!world.isClient() && entity instanceof PlayerEntity) {
-            BasicEnergyBlockEntity energyBlockEntity = (BasicEnergyBlockEntity) world.getBlockEntity(pos);
+            BlockEntityEnergyStorage energyBlockEntity = (BlockEntityEnergyStorage) world.getBlockEntity(pos);
             assert energyBlockEntity != null;
             CompoundTag tag = new CompoundTag();
             energyBlockEntity.toTag(tag);
@@ -43,6 +44,6 @@ public class BasicEnergyBlock extends Block implements BlockEntityProvider
     @Override
     public BlockEntity createBlockEntity(BlockView blockView)
     {
-        return new BasicEnergyBlockEntity(tier);
+        return new BlockEntityEnergyStorage(tier);
     }
 }

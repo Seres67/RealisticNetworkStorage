@@ -1,13 +1,13 @@
 package com.seres.realisticnetworkstorage.events;
 
 import com.seres.realisticnetworkstorage.RealisticNetworkStorage;
-import com.seres.realisticnetworkstorage.blockentities.BasicEnergyBlockEntity;
 import com.seres.realisticnetworkstorage.blockentities.RNSBlockEntities;
 import com.seres.realisticnetworkstorage.blocks.BasicBlock;
-import com.seres.realisticnetworkstorage.blocks.BasicEnergyBlock;
+import com.seres.realisticnetworkstorage.blocks.BasicEnergyStorage;
 import com.seres.realisticnetworkstorage.blocks.RNSBlocks;
+import com.seres.realisticnetworkstorage.energy.BlockEntityEnergyStorage;
 import com.seres.realisticnetworkstorage.energy.EnergyTier;
-import com.seres.realisticnetworkstorage.items.BasicEnergyItem;
+import com.seres.realisticnetworkstorage.items.EnergyTransferStick;
 import com.seres.realisticnetworkstorage.items.RNSItems;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -30,18 +30,18 @@ public class RNSRegistry
     private static void registerBlocks()
     {
         registerBlock(RNSBlocks.BASIC_BLOCK = new BasicBlock(AbstractBlock.Settings.of(Material.STONE)), "basic_block");
-        registerBlock(RNSBlocks.BASIC_ENERGY_BLOCK = new BasicEnergyBlock(AbstractBlock.Settings.of(Material.STONE), EnergyTier.MID), "basic_energy_block");
+        registerBlock(RNSBlocks.BASIC_ENERGY_BLOCK = new BasicEnergyStorage(AbstractBlock.Settings.of(Material.STONE), EnergyTier.MID), "basic_energy_storage");
     }
 
     private static void registerItems()
     {
-        registerItem(RNSItems.ENERGY_ITEM = new BasicEnergyItem(new Item.Settings().group(RealisticNetworkStorage.ITEMGROUP), 1000, EnergyTier.HIGH), "energy_item");
+        registerItem(RNSItems.ENERGY_ITEM = new EnergyTransferStick(new Item.Settings().group(RealisticNetworkStorage.ITEMGROUP), 1000, EnergyTier.HIGH), "energy_transfer_stick");
     }
 
     private static void registerBlockEntities()
     {
-        RNSBlockEntities.BASIC_ENERGY_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE,
-                "realisticnetworkstorage:basic_energy_block_entity", BlockEntityType.Builder.create(BasicEnergyBlockEntity::new, RNSBlocks.BASIC_ENERGY_BLOCK).build(null));
+        RNSBlockEntities.BLOCK_ENTITY_ENERGY_STORAGE = Registry.register(Registry.BLOCK_ENTITY_TYPE,
+                "realisticnetworkstorage:basic_energy_block_entity", BlockEntityType.Builder.create(BlockEntityEnergyStorage::new, RNSBlocks.BASIC_ENERGY_BLOCK).build(null));
     }
 
     public static void registerBlock(Block block, String name)

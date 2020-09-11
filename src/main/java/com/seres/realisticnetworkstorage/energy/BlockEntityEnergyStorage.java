@@ -1,6 +1,6 @@
-package com.seres.realisticnetworkstorage.blockentities;
+package com.seres.realisticnetworkstorage.energy;
 
-import com.seres.realisticnetworkstorage.energy.EnergyTier;
+import com.seres.realisticnetworkstorage.blockentities.RNSBlockEntities;
 import com.seres.realisticnetworkstorage.network.ServerboundPackets;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
@@ -10,20 +10,20 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
 
-public class BasicEnergyBlockEntity extends BlockEntity
+public class BlockEntityEnergyStorage extends BlockEntity
 {
     private double energyStored = 0;
     private EnergyTier tier;
 
-    public BasicEnergyBlockEntity(EnergyTier tier)
+    public BlockEntityEnergyStorage(EnergyTier tier)
     {
-        super(RNSBlockEntities.BASIC_ENERGY_BLOCK_ENTITY);
+        super(RNSBlockEntities.BLOCK_ENTITY_ENERGY_STORAGE);
         this.tier = tier;
     }
 
-    public BasicEnergyBlockEntity()
+    public BlockEntityEnergyStorage()
     {
-        super(RNSBlockEntities.BASIC_ENERGY_BLOCK_ENTITY);
+        super(RNSBlockEntities.BLOCK_ENTITY_ENERGY_STORAGE);
     }
 
     @Override

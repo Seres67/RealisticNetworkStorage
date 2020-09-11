@@ -2,5 +2,5 @@ package com.seres.realisticnetworkstorage.items;
 
 public class RNSItems
 {
-    public static BasicEnergyItem ENERGY_ITEM;
+    public static EnergyTransferStick ENERGY_ITEM;
 }

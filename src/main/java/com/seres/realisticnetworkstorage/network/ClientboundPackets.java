@@ -9,10 +9,8 @@ public class ClientboundPackets
     {
         ClientSidePacketRegistry.INSTANCE.register(ServerboundPackets.CHAT_MESSAGE_PACKET_ID,
                 (packetContext, attachedData) -> {
-                    String energy = attachedData.readString();
-                    packetContext.getTaskQueue().execute(() -> {
-                        packetContext.getPlayer().sendMessage(Text.of(energy), false);
-                    });
+                    String message = attachedData.readString();
+                    packetContext.getTaskQueue().execute(() -> packetContext.getPlayer().sendMessage(Text.of(message), false));
                 });
     }
 }

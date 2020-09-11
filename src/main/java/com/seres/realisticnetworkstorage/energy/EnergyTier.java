@@ -9,7 +9,7 @@ public enum EnergyTier
     private final int maxInput;
     private final int maxOutput;
 
-    private String name;
+    private final String name;
 
     EnergyTier(String name, int maxIn, int maxOut)
     {

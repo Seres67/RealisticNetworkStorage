@@ -4,6 +4,6 @@
   "text.autoconfig.realisticnetworkstorage.option.enabled.@Tooltip": "Enable or disable this mod",
   "itemGroup.realisticnetworkstorage.item_group": "Realistic Network Storage",
   "block.realisticnetworkstorage.basic_block": "Basic Block",
-  "block.realisticnetworkstorage.basic_energy_block": "Basic Energy Block",
-  "item.realisticnetworkstorage.energy_item": "Energy Item"
+  "block.realisticnetworkstorage.basic_energy_storage": "Basic Energy Storage",
+  "item.realisticnetworkstorage.energy_transfer_stick": "Energy Transfer Stick"
 }
