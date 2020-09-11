@@ -1,5 +1,6 @@
 package com.seres.realisticnetworkstorage.blockentities;
 
+import com.seres.realisticnetworkstorage.energy.EnergyTier;
 import com.seres.realisticnetworkstorage.network.ServerboundPackets;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
@@ -12,6 +13,13 @@ import net.minecraft.network.PacketByteBuf;
 public class BasicEnergyBlockEntity extends BlockEntity
 {
     private double energyStored = 0;
+    private EnergyTier tier;
+
+    public BasicEnergyBlockEntity(EnergyTier tier)
+    {
+        super(RNSBlockEntities.BASIC_ENERGY_BLOCK_ENTITY);
+        this.tier = tier;
+    }
 
     public BasicEnergyBlockEntity()
     {
@@ -41,5 +49,20 @@ public class BasicEnergyBlockEntity extends BlockEntity
 
         blockData.writeString("Block has: " + energyStored);
         ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, ServerboundPackets.CHAT_MESSAGE_PACKET_ID, blockData);
+    }
+
+    public double getStoredEnergy()
+    {
+        return energyStored;
+    }
+
+    public double getMaxOutput()
+    {
+        return tier.getMaxOutput();
+    }
+
+    public double getMaxInput()
+    {
+        return tier.getMaxInput();
     }
 }

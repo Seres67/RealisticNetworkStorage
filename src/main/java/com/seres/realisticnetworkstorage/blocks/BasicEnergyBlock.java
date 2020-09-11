@@ -1,6 +1,7 @@
 package com.seres.realisticnetworkstorage.blocks;
 
 import com.seres.realisticnetworkstorage.blockentities.BasicEnergyBlockEntity;
+import com.seres.realisticnetworkstorage.energy.EnergyTier;
 import com.seres.realisticnetworkstorage.network.ServerboundPackets;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
@@ -17,9 +18,11 @@ import net.minecraft.world.World;
 
 public class BasicEnergyBlock extends Block implements BlockEntityProvider
 {
-    public BasicEnergyBlock(Settings settings)
+    private EnergyTier tier;
+    public BasicEnergyBlock(Settings settings, EnergyTier tier)
     {
         super(settings);
+        this.tier = tier;
     }
 
     @Override
@@ -40,6 +43,6 @@ public class BasicEnergyBlock extends Block implements BlockEntityProvider
     @Override
     public BlockEntity createBlockEntity(BlockView blockView)
     {
-        return new BasicEnergyBlockEntity();
+        return new BasicEnergyBlockEntity(tier);
     }
 }

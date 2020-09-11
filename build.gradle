@@ -25,10 +25,6 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    // TechReborn Energy API
-    modApi "teamreborn:energy:${project.energy_version}"
-    include "teamreborn:energy:${project.energy_version}"
-
     // Mod Menu API
     modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
 
@@ -46,7 +42,7 @@ dependencies {
     include "me.shedaniel.cloth:config-2:${project.clothconfig_version}"
     include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
 
-    compileOnly "com.google.code.findbugs:jsr305:3.0.2"
+    compileOnly ("com.google.code.findbugs:jsr305:3.0.2") { transitive = false }
 }
 
 processResources {
