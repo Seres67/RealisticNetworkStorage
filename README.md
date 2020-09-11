@@ -4,7 +4,7 @@
 Realistic Network Storage (or RNS) is a Fabric mod that adds network storage and many other machines!
 
 ### Downloads
-I won't provide any download links for now as I am still working on core functionalities.
+Check out the [releases](https://github.com/Seres67/RealisticNetworkStorage/releases) tab to download this mod.
 ___
 ### Building
 
