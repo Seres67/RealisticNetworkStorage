@@ -14,10 +14,10 @@ import net.minecraft.util.Identifier;
 public class RealisticNetworkStorage implements ModInitializer
 {
     public static final String MODID = "realisticnetworkstorage";
-    public static ModConfig config;
-    public static ItemGroup ITEMGROUP = FabricItemGroupBuilder.build(
+    public static final ItemGroup ITEMGROUP = FabricItemGroupBuilder.build(
             new Identifier("realisticnetworkstorage", "item_group"),
             () -> new ItemStack(Items.STICK));
+    public static ModConfig config;
 
     @Override
     public void onInitialize()

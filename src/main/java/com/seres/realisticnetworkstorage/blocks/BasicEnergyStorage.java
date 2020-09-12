@@ -1,22 +1,22 @@
 package com.seres.realisticnetworkstorage.blocks;
 
-import com.seres.realisticnetworkstorage.energy.BlockEntityEnergyStorage;
+import com.seres.realisticnetworkstorage.blockentities.BlockEntityEnergyStorage;
 import com.seres.realisticnetworkstorage.energy.EnergyTier;
-import com.seres.realisticnetworkstorage.network.ServerboundPackets;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class BasicEnergyStorage extends Block implements BlockEntityProvider
+public class BasicEnergyStorage extends BlockWithEntity implements BlockEntityProvider
 {
     private final EnergyTier tier;
 
@@ -24,6 +24,18 @@ public class BasicEnergyStorage extends Block implements BlockEntityProvider
     {
         super(settings);
         this.tier = tier;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
+    {
+        if (world.isClient)
+            return ActionResult.SUCCESS;
+        BlockEntity be = world.getBlockEntity(pos);
+        if (be instanceof BlockEntityEnergyStorage)
+            player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
+        return ActionResult.SUCCESS;
     }
 
     @Override
@@ -34,10 +46,6 @@ public class BasicEnergyStorage extends Block implements BlockEntityProvider
             assert energyBlockEntity != null;
             CompoundTag tag = new CompoundTag();
             energyBlockEntity.toTag(tag);
-            double energy = tag.getDouble("energyStored");
-            PacketByteBuf blockData = new PacketByteBuf(Unpooled.buffer());
-            blockData.writeString("Block has: " + energy);
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer((PlayerEntity) entity, ServerboundPackets.CHAT_MESSAGE_PACKET_ID, blockData);
         }
     }
 

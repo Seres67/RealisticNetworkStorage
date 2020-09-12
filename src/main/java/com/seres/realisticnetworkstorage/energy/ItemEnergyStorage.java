@@ -16,24 +16,24 @@ public class ItemEnergyStorage extends Item
         this.tier = tier;
     }
 
-    public void setMaxEnergy(double max)
-    {
-        this.max = max;
-    }
-
     public double getMaxEnergy()
     {
         return max;
     }
 
-    public void setTier(EnergyTier tier)
+    public void setMaxEnergy(double max)
     {
-        this.tier = tier;
+        this.max = max;
     }
 
     public EnergyTier getTier()
     {
         return tier;
+    }
+
+    public void setTier(EnergyTier tier)
+    {
+        this.tier = tier;
     }
 
     public double getStoredEnergy(ItemStack stack)

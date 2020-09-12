@@ -1,7 +1,7 @@
 package com.seres.realisticnetworkstorage.items;
 
+import com.seres.realisticnetworkstorage.blockentities.BlockEntityEnergyStorage;
 import com.seres.realisticnetworkstorage.blocks.BasicEnergyStorage;
-import com.seres.realisticnetworkstorage.energy.BlockEntityEnergyStorage;
 import com.seres.realisticnetworkstorage.energy.EnergyTier;
 import com.seres.realisticnetworkstorage.energy.ItemEnergyStorage;
 import com.seres.realisticnetworkstorage.network.ServerboundPackets;
@@ -42,11 +42,10 @@ public class EnergyTransferStick extends ItemEnergyStorage
                 assert energyBlock != null;
                 double energyToTransfer = Math.min(energyItem.getMaxOutput(), energyItem.getStoredEnergy(energyItemStack));
                 double energyTransfered = Math.min(energyToTransfer, energyBlock.getMaxInput());
-                PacketByteBuf beforeData = new PacketByteBuf(Unpooled.buffer());
+                double test = energyBlock.getStoredEnergy() + energyTransfered;
 
-                beforeData.writeString("transfered: " + energyTransfered);
-                ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, ServerboundPackets.CHAT_MESSAGE_PACKET_ID, beforeData);
-
+                if (test >= energyBlock.getMaxEnergy())
+                    energyTransfered -= test - energyBlock.getMaxEnergy();
                 energyItem.setStoredEnergy(energyItemStack, energyItem.getStoredEnergy(energyItemStack) - energyTransfered);
                 energyBlock.addEnergy(player, energyTransfered);
             }

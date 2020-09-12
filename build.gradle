@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.5-SNAPSHOT'
+    id 'fabric-loom' version '0.4-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -12,6 +12,10 @@ group = project.maven_group
 
 repositories {
     jcenter()
+    maven {
+        name = "CottonMC"
+        url = "https://server.bbkr.space/artifactory/libs-release"
+    }
 }
 
 dependencies {
@@ -38,11 +42,13 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
+    // LibGui
+    modImplementation "io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2"
     // Include libs in the JAR so users don't need to have the mod
     include "me.shedaniel.cloth:config-2:${project.clothconfig_version}"
     include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
 
-    compileOnly ("com.google.code.findbugs:jsr305:3.0.2") { transitive = false }
+    compileOnly("com.google.code.findbugs:jsr305:3.0.2") { transitive = false }
 }
 
 processResources {

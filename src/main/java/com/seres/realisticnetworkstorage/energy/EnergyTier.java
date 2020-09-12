@@ -18,6 +18,11 @@ public enum EnergyTier
         this.name = name;
     }
 
+    public static EnergyTier getByName(String name)
+    {
+        return EnergyTier.valueOf(name);
+    }
+
     public int getMaxInput()
     {
         return maxInput;
@@ -31,11 +36,6 @@ public enum EnergyTier
     public String getName()
     {
         return name;
-    }
-
-    public static EnergyTier getByName(String name)
-    {
-        return EnergyTier.valueOf(name);
     }
 
     @Override
