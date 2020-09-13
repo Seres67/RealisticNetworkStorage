@@ -1,6 +1,6 @@
 package com.seres.realisticnetworkstorage.items;
 
-import com.seres.realisticnetworkstorage.blockentities.BlockEntityEnergyStorage;
+import com.seres.realisticnetworkstorage.blockentities.BasicEnergyStorageBlockEntity;
 import com.seres.realisticnetworkstorage.blocks.BasicEnergyStorage;
 import com.seres.realisticnetworkstorage.energy.EnergyTier;
 import com.seres.realisticnetworkstorage.energy.ItemEnergyStorage;
@@ -38,16 +38,16 @@ public class EnergyTransferStick extends ItemEnergyStorage
         }
         if (!world.isClient() && world.getBlockState(context.getBlockPos()).getBlock() instanceof BasicEnergyStorage) {
             if (energyItem.getStoredEnergy(energyItemStack) > 0) {
-                BlockEntityEnergyStorage energyBlock = (BlockEntityEnergyStorage) world.getBlockEntity(context.getBlockPos());
+                BasicEnergyStorageBlockEntity energyBlock = (BasicEnergyStorageBlockEntity) world.getBlockEntity(context.getBlockPos());
                 assert energyBlock != null;
                 double energyToTransfer = Math.min(energyItem.getMaxOutput(), energyItem.getStoredEnergy(energyItemStack));
-                double energyTransfered = Math.min(energyToTransfer, energyBlock.getMaxInput());
-                double test = energyBlock.getStoredEnergy() + energyTransfered;
+                double energyTransferred = Math.min(energyToTransfer, energyBlock.getMaxInput());
+                double test = energyBlock.getStoredEnergy() + energyTransferred;
 
                 if (test >= energyBlock.getMaxEnergy())
-                    energyTransfered -= test - energyBlock.getMaxEnergy();
-                energyItem.setStoredEnergy(energyItemStack, energyItem.getStoredEnergy(energyItemStack) - energyTransfered);
-                energyBlock.addEnergy(player, energyTransfered);
+                    energyTransferred -= test - energyBlock.getMaxEnergy();
+                energyItem.setStoredEnergy(energyItemStack, energyItem.getStoredEnergy(energyItemStack) - energyTransferred);
+                energyBlock.addEnergy(player, energyTransferred);
             }
         } else if (!world.isClient()) {
             double storedEnergy = energyItem.getStoredEnergy(energyItemStack);

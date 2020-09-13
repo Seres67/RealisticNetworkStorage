@@ -1,4 +1,4 @@
-package com.seres.realisticnetworkstorage.gui;
+package com.seres.realisticnetworkstorage.gui.basicenergystorage;
 
 import io.github.cottonmc.cotton.gui.client.CottonInventoryScreen;
 import net.minecraft.entity.player.PlayerEntity;

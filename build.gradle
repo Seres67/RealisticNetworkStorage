@@ -43,7 +43,7 @@ dependencies {
     }
 
     // LibGui
-    modImplementation "io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2"
+    modImplementation "io.github.cottonmc:LibGui:${project.libgui_version}"
     // Include libs in the JAR so users don't need to have the mod
     include "me.shedaniel.cloth:config-2:${project.clothconfig_version}"
     include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"

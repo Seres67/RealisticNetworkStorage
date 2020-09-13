@@ -4,5 +4,7 @@ import net.minecraft.block.entity.BlockEntityType;
 
 public class RNSBlockEntities
 {
-    public static BlockEntityType<BlockEntityEnergyStorage> BLOCK_ENTITY_ENERGY_STORAGE;
+    public static BlockEntityType<BasicEnergyStorageBlockEntity> BASIC_ENERGY_STORAGE;
+    public static BlockEntityType<BasicGeneratorBlockEntity> BASIC_GENERATOR;
+
 }

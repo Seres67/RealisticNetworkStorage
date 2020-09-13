@@ -1,7 +1,7 @@
 package com.seres.realisticnetworkstorage.blockentities;
 
 import com.seres.realisticnetworkstorage.energy.EnergyTier;
-import com.seres.realisticnetworkstorage.gui.BasicEnergyStorageController;
+import com.seres.realisticnetworkstorage.gui.basicenergystorage.BasicEnergyStorageController;
 import io.github.cottonmc.cotton.gui.PropertyDelegateHolder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -15,16 +15,16 @@ import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-public class BlockEntityEnergyStorage extends BlockEntity implements NamedScreenHandlerFactory, PropertyDelegateHolder
+public class BasicEnergyStorageBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, PropertyDelegateHolder
 {
     private final EnergyTier tier;
     private final PropertyDelegate propertyDelegate;
     private double energyStored = 0;
     private double max = 10000;
 
-    public BlockEntityEnergyStorage(EnergyTier tier)
+    public BasicEnergyStorageBlockEntity(EnergyTier tier)
     {
-        super(RNSBlockEntities.BLOCK_ENTITY_ENERGY_STORAGE);
+        super(RNSBlockEntities.BASIC_ENERGY_STORAGE);
         this.tier = tier;
         this.propertyDelegate = new PropertyDelegate()
         {

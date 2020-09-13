@@ -5,6 +5,8 @@
   "itemGroup.realisticnetworkstorage.item_group": "Realistic Network Storage",
   "block.realisticnetworkstorage.basic_block": "Basic Block",
   "block.realisticnetworkstorage.basic_energy_storage": "Basic Energy Storage",
+  "block.realisticnetworkstorage.basic_generator": "Basic Generator",
   "item.realisticnetworkstorage.energy_transfer_stick": "Energy Transfer Stick",
-  "gui.realisticnetworkstorage.energy_storage.tooltip": "Energy: %d/%d"
+  "gui.realisticnetworkstorage.energy_storage.tooltip": "Energy: %d/%d",
+  "gui.realisticnetworkstorage.energy_generator.tooltip": "Energy: %d/%d"
 }

@@ -4,4 +4,5 @@ public class RNSBlocks
 {
     public static BasicBlock BASIC_BLOCK;
     public static BasicEnergyStorage BASIC_ENERGY_BLOCK;
+    public static BasicGeneratorBlock BASIC_GENERATOR;
 }
