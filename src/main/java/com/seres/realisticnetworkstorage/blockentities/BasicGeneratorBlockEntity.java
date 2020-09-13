@@ -3,36 +3,23 @@ package com.seres.realisticnetworkstorage.blockentities;
 import com.seres.realisticnetworkstorage.energy.EnergyTier;
 import com.seres.realisticnetworkstorage.gui.basicgenerator.BasicGeneratorController;
 import com.seres.realisticnetworkstorage.util.ImplementedInventory;
-import io.github.cottonmc.cotton.gui.PropertyDelegateHolder;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventories;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 
 import java.util.Map;
 
-public class BasicGeneratorBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, PropertyDelegateHolder, ImplementedInventory, Tickable
+public class BasicGeneratorBlockEntity extends BasicEnergyGuiBlockEntity implements ImplementedInventory, Tickable
 {
-    private final EnergyTier tier;
-    private double energyStored = 0;
-    private double max = 2000;
-    private final PropertyDelegate propertyDelegate;
     private final DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public int fuelSlot = 0;
     public int burnTime;
@@ -41,59 +28,7 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements NamedScree
 
     public BasicGeneratorBlockEntity(EnergyTier tier)
     {
-        super(RNSBlockEntities.BASIC_GENERATOR);
-        this.tier = tier;
-        this.propertyDelegate = new PropertyDelegate()
-        {
-            @Override
-            public int get(int index)
-            {
-                switch (index) {
-                    case 0:
-                        return (int) getStoredEnergy();
-                    case 1:
-                        return (int) getMaxEnergy();
-                    default:
-                        return -1;
-                }
-            }
-
-            @Override
-            public void set(int index, int value)
-            {
-                switch (index) {
-                    case 0:
-                        setStoredEnergy(value);
-                        break;
-                    case 1:
-                        setMaxEnergy(value);
-                        break;
-                }
-            }
-
-            @Override
-            public int size()
-            {
-                return 2;
-            }
-        };
-    }
-
-    @Override
-    public void fromTag(BlockState state, CompoundTag tag)
-    {
-        super.fromTag(state, tag);
-        energyStored = tag.getDouble("energyStored");
-        Inventories.fromTag(tag, items);
-    }
-
-    @Override
-    public CompoundTag toTag(CompoundTag tag)
-    {
-        super.toTag(tag);
-        tag.putDouble("energyStored", energyStored);
-        Inventories.toTag(tag, items);
-        return tag;
+        super(RNSBlockEntities.BASIC_GENERATOR, tier);
     }
 
     public static int getItemBurnTime(ItemStack stack)
@@ -137,7 +72,7 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements NamedScree
         if (getStoredEnergy() > 0) {
             for (Direction side : Direction.values()) {
                 BasicEnergyStorageBlockEntity blockEntity = (BasicEnergyStorageBlockEntity) getWorld().getBlockEntity(getPos().offset(side));
-                if (blockEntity == null)
+                if (blockEntity == null || !blockEntity.canReceiveEnergy())
                     continue;
                 double energyToTransfer = Math.min(getMaxOutput(), getStoredEnergy());
                 double energyTransferred = Math.min(energyToTransfer, blockEntity.getMaxInput());
@@ -151,53 +86,10 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements NamedScree
         }
     }
 
-    public double getStoredEnergy()
-    {
-        return energyStored;
-    }
-
-    public void setStoredEnergy(double amount)
-    {
-        energyStored = amount;
-        markDirty();
-    }
-
-    public double getMaxOutput()
-    {
-        return tier.getMaxOutput();
-    }
-
-    public double getMaxInput()
-    {
-        return tier.getMaxInput();
-    }
-
-    public double getMaxEnergy()
-    {
-        return max;
-    }
-
-    public void setMaxEnergy(double value)
-    {
-        max = value;
-    }
-
-    @Override
-    public Text getDisplayName()
-    {
-        return new TranslatableText(getCachedState().getBlock().getTranslationKey());
-    }
-
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player)
     {
         return new BasicGeneratorController(syncId, inventory, ScreenHandlerContext.create(world, pos));
-    }
-
-    @Override
-    public PropertyDelegate getPropertyDelegate()
-    {
-        return propertyDelegate;
     }
 
     @Override
