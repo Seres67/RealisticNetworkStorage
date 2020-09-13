@@ -3,7 +3,6 @@ package com.seres.realisticnetworkstorage.blockentities;
 import com.seres.realisticnetworkstorage.energy.EnergyTier;
 import com.seres.realisticnetworkstorage.gui.basicgenerator.BasicGeneratorController;
 import com.seres.realisticnetworkstorage.util.ImplementedInventory;
-import com.sun.istack.internal.NotNull;
 import io.github.cottonmc.cotton.gui.PropertyDelegateHolder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
@@ -38,8 +37,6 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements NamedScree
     public int fuelSlot = 0;
     public int burnTime;
     public int totalBurnTime = 0;
-    public boolean isBurning;
-    public boolean lastTickBurning;
     ItemStack burnItem;
 
     public BasicGeneratorBlockEntity(EnergyTier tier)
@@ -99,7 +96,7 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements NamedScree
         return tag;
     }
 
-    public static int getItemBurnTime(@NotNull ItemStack stack)
+    public static int getItemBurnTime(ItemStack stack)
     {
         if (stack.isEmpty())
             return 0;
@@ -115,16 +112,13 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements NamedScree
         assert world != null;
         if (world.isClient)
             return;
-        if (getStoredEnergy() < getMaxEnergy()) {
+        if (getStoredEnergy() < getMaxEnergy())
             if (burnTime > 0) {
                 burnTime--;
                 setStoredEnergy(getStoredEnergy() + 2D);
-                isBurning = true;
             }
-        } else
-            isBurning = false;
         if (burnTime == 0) {
-            burnTime = totalBurnTime = BasicGeneratorBlockEntity.getItemBurnTime(items.get(fuelSlot));
+            burnTime = totalBurnTime = getItemBurnTime(items.get(fuelSlot));
             if (burnTime > 0) {
                 burnItem = items.get(fuelSlot);
                 if (items.get(fuelSlot).getCount() == 1) {
@@ -139,7 +133,6 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements NamedScree
                 }
             }
         }
-        lastTickBurning = isBurning;
 
         if (getStoredEnergy() > 0) {
             for (Direction side : Direction.values()) {
