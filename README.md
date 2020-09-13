@@ -12,7 +12,7 @@ ___
 You will need JDK8 to build this mod.  
 
 #### Building
-To build this mod, simply clone it, open your terminal in the cloned directory and run `./gradlew build`. This should output multiple JAR files in `build/libs`, one being the actual mod.
+To build this mod, simply clone it, open your terminal in the cloned directory and run `./gradlew build`. This should output multiple JAR files in `build/libs`, the mod being the file named `realisticnetworkstorage-$version.jar`.
 ___
 ### License  
 RNS is licensed under the MIT license. For more information, please see the [license file](https://github.com/Seres67/RealisticNetworkStorage/blob/master/LICENSE).
