@@ -26,7 +26,7 @@ package com.seres.realisticnetworkstorage.blocks;
 
 public class RNSBlocks
 {
-    public static BasicBlock BASIC_BLOCK;
-    public static BasicEnergyStorage BASIC_ENERGY_BLOCK;
+    public static BasicEnergyStorage BASIC_ENERGY_STORAGE;
     public static BasicGeneratorBlock BASIC_GENERATOR;
+    public static DiskController DISK_CONTROLLER;
 }

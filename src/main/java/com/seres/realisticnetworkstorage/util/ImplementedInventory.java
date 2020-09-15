@@ -34,12 +34,6 @@ import net.minecraft.util.collection.DefaultedList;
 public interface ImplementedInventory extends Inventory
 {
     /**
-     * Retrieves the item list of this inventory.
-     * Must return the same instance every time it's called.
-     */
-    DefaultedList<ItemStack> getItems();
-
-    /**
      * Creates an inventory from the item list.
      */
     static ImplementedInventory of(DefaultedList<ItemStack> items)
@@ -54,6 +48,12 @@ public interface ImplementedInventory extends Inventory
     {
         return of(DefaultedList.ofSize(size, ItemStack.EMPTY));
     }
+
+    /**
+     * Retrieves the item list of this inventory.
+     * Must return the same instance every time it's called.
+     */
+    DefaultedList<ItemStack> getItems();
 
     /**
      * Returns the inventory size.

@@ -31,7 +31,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 
-public class BasicEnergyStorageBlockEntity extends BasicEnergyGuiBlockEntity
+public class BasicEnergyStorageBlockEntity extends BlockEntityWithGui
 {
     public BasicEnergyStorageBlockEntity(EnergyTier tier)
     {

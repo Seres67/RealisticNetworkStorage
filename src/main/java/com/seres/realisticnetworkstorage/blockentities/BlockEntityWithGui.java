@@ -35,11 +35,11 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-public class BasicEnergyGuiBlockEntity extends BasicEnergyBlockEntity implements NamedScreenHandlerFactory, PropertyDelegateHolder
+public class BlockEntityWithGui extends BlockEntityWithEnergy implements NamedScreenHandlerFactory, PropertyDelegateHolder
 {
     private final PropertyDelegate propertyDelegate;
 
-    public BasicEnergyGuiBlockEntity(BlockEntityType<?> type, EnergyTier tier)
+    public BlockEntityWithGui(BlockEntityType<?> type, EnergyTier tier)
     {
         super(type, tier);
         this.propertyDelegate = new PropertyDelegate()

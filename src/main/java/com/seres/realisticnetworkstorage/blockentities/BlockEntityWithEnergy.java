@@ -31,13 +31,13 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 
-public class BasicEnergyBlockEntity extends BlockEntity
+public class BlockEntityWithEnergy extends BlockEntity
 {
     private final EnergyTier tier;
     private double energyStored = 0;
     private double max = 10000;
 
-    public BasicEnergyBlockEntity(BlockEntityType<?> type, EnergyTier tier)
+    public BlockEntityWithEnergy(BlockEntityType<?> type, EnergyTier tier)
     {
         super(type);
         this.tier = tier;

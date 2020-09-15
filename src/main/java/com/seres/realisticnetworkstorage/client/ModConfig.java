@@ -34,7 +34,7 @@ import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
 public class ModConfig implements ConfigData
 {
     @ConfigEntry.Gui.Tooltip
-    public boolean enabled = true;
+    public double energyGainMultiplier = 2D;
 
     public static ModConfig getInstance()
     {

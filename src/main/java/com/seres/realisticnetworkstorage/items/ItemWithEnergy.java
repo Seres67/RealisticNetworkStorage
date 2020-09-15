@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-package com.seres.realisticnetworkstorage.energy;
+package com.seres.realisticnetworkstorage.items;
 
+import com.seres.realisticnetworkstorage.energy.EnergyTier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
@@ -36,12 +37,12 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class BasicEnergyItem extends Item
+public class ItemWithEnergy extends Item
 {
     private double max;
     private EnergyTier tier;
 
-    public BasicEnergyItem(Settings settings, double max, EnergyTier tier)
+    public ItemWithEnergy(Settings settings, double max, EnergyTier tier)
     {
         super(settings);
         this.max = max;

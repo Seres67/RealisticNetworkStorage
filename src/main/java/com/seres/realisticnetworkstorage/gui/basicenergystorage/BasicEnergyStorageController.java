@@ -25,7 +25,7 @@
 package com.seres.realisticnetworkstorage.gui.basicenergystorage;
 
 import com.seres.realisticnetworkstorage.RealisticNetworkStorage;
-import com.seres.realisticnetworkstorage.events.RNSRegistry;
+import com.seres.realisticnetworkstorage.gui.RNSScreens;
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WBar;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
@@ -38,7 +38,7 @@ public class BasicEnergyStorageController extends SyncedGuiDescription
 {
     public BasicEnergyStorageController(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context)
     {
-        super(RNSRegistry.basicEnergyStorageScreen, syncId, playerInventory, getBlockInventory(context, 0), getBlockPropertyDelegate(context, 2));
+        super(RNSScreens.basicEnergyStorageScreen, syncId, playerInventory, getBlockInventory(context, 0), getBlockPropertyDelegate(context, 2));
         WGridPanel root = new WGridPanel();
         setRootPanel(root);
         Texture bg = new Texture(new Identifier(RealisticNetworkStorage.MODID, "textures/gui/bar.png"));

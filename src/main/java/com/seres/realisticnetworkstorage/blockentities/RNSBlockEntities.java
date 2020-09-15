@@ -30,4 +30,5 @@ public class RNSBlockEntities
 {
     public static BlockEntityType<BasicEnergyStorageBlockEntity> BASIC_ENERGY_STORAGE;
     public static BlockEntityType<BasicGeneratorBlockEntity> BASIC_GENERATOR;
+    public static BlockEntityType<DiskControllerBlockEntity> DISK_CONTROLLER;
 }

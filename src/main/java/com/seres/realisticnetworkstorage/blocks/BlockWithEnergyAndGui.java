@@ -24,8 +24,9 @@
 
 package com.seres.realisticnetworkstorage.blocks;
 
-import com.seres.realisticnetworkstorage.blockentities.BasicEnergyGuiBlockEntity;
+import com.seres.realisticnetworkstorage.blockentities.BlockEntityWithGui;
 import com.seres.realisticnetworkstorage.energy.EnergyTier;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,9 +36,9 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BasicEnergyGuiBlock extends BasicEnergyBlock
+public class BlockWithEnergyAndGui extends BlockWithEnergy
 {
-    public BasicEnergyGuiBlock(Settings settings, EnergyTier tier)
+    public BlockWithEnergyAndGui(Settings settings, EnergyTier tier)
     {
         super(settings, tier);
     }
@@ -49,7 +50,7 @@ public class BasicEnergyGuiBlock extends BasicEnergyBlock
         if (world.isClient)
             return ActionResult.SUCCESS;
         BlockEntity be = world.getBlockEntity(pos);
-        if (be instanceof BasicEnergyGuiBlockEntity)
+        if (be instanceof BlockEntityWithGui)
             player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
         return ActionResult.SUCCESS;
     }

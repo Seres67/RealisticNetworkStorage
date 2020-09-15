@@ -24,9 +24,10 @@
 
 package com.seres.realisticnetworkstorage.blockentities;
 
+import com.seres.realisticnetworkstorage.client.ModConfig;
 import com.seres.realisticnetworkstorage.energy.EnergyTier;
 import com.seres.realisticnetworkstorage.gui.basicgenerator.BasicGeneratorController;
-import com.seres.realisticnetworkstorage.util.ImplementedInventory;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -34,17 +35,16 @@ import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.util.Tickable;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 
 import java.util.Map;
 
-public class BasicGeneratorBlockEntity extends BasicEnergyGuiBlockEntity implements ImplementedInventory, Tickable
+public class BasicGeneratorBlockEntity extends BlockEntityWithInventory implements Tickable
 {
-    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public int fuelSlot = 0;
     public int burnTime;
     public int totalBurnTime = 0;
@@ -52,7 +52,7 @@ public class BasicGeneratorBlockEntity extends BasicEnergyGuiBlockEntity impleme
 
     public BasicGeneratorBlockEntity(EnergyTier tier)
     {
-        super(RNSBlockEntities.BASIC_GENERATOR, tier);
+        super(RNSBlockEntities.BASIC_GENERATOR, tier, 1);
     }
 
     public static int getItemBurnTime(ItemStack stack)
@@ -66,6 +66,27 @@ public class BasicGeneratorBlockEntity extends BasicEnergyGuiBlockEntity impleme
     }
 
     @Override
+    public boolean canReceiveEnergy()
+    {
+        return false;
+    }
+
+    @Override
+    public void fromTag(BlockState state, CompoundTag tag)
+    {
+        super.fromTag(state, tag);
+        burnTime = tag.getInt("burnTime");
+    }
+
+    @Override
+    public CompoundTag toTag(CompoundTag tag)
+    {
+        super.toTag(tag);
+        tag.putInt("burnTime", burnTime);
+        return tag;
+    }
+
+    @Override
     public void tick()
     {
         assert world != null;
@@ -73,11 +94,13 @@ public class BasicGeneratorBlockEntity extends BasicEnergyGuiBlockEntity impleme
             return;
         if (getStoredEnergy() < getMaxEnergy())
             if (burnTime > 0) {
-                burnTime--;
-                setStoredEnergy(getStoredEnergy() + 2D);
+                burnTime -= 1 * ModConfig.getInstance().energyGainMultiplier;
+                markDirty();
+                setStoredEnergy(getStoredEnergy() + ModConfig.getInstance().energyGainMultiplier * 2);
             }
         if (burnTime == 0) {
             burnTime = totalBurnTime = getItemBurnTime(items.get(fuelSlot));
+            markDirty();
             if (burnTime > 0) {
                 burnItem = items.get(fuelSlot);
                 if (items.get(fuelSlot).getCount() == 1) {
@@ -114,17 +137,5 @@ public class BasicGeneratorBlockEntity extends BasicEnergyGuiBlockEntity impleme
     public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player)
     {
         return new BasicGeneratorController(syncId, inventory, ScreenHandlerContext.create(world, pos));
-    }
-
-    @Override
-    public DefaultedList<ItemStack> getItems()
-    {
-        return items;
-    }
-
-    @Override
-    public boolean canPlayerUse(PlayerEntity player)
-    {
-        return pos.isWithinDistance(player.getBlockPos(), 4.5);
     }
 }

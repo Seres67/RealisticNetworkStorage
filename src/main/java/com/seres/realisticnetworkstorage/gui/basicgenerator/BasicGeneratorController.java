@@ -25,7 +25,7 @@
 package com.seres.realisticnetworkstorage.gui.basicgenerator;
 
 import com.seres.realisticnetworkstorage.RealisticNetworkStorage;
-import com.seres.realisticnetworkstorage.events.RNSRegistry;
+import com.seres.realisticnetworkstorage.gui.RNSScreens;
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WBar;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
@@ -39,7 +39,7 @@ public class BasicGeneratorController extends SyncedGuiDescription
 {
     public BasicGeneratorController(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context)
     {
-        super(RNSRegistry.basicGeneratorScreen, syncId, playerInventory, getBlockInventory(context, 1), getBlockPropertyDelegate(context, 2));
+        super(RNSScreens.basicGeneratorScreen, syncId, playerInventory, getBlockInventory(context, 1), getBlockPropertyDelegate(context, 2));
         WGridPanel root = new WGridPanel();
         setRootPanel(root);
         Texture bg = new Texture(new Identifier(RealisticNetworkStorage.MODID, "textures/gui/bar.png"));
