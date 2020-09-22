@@ -42,6 +42,7 @@ import net.minecraft.util.Tickable;
 import net.minecraft.util.math.Direction;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class BasicGeneratorBlockEntity extends BlockEntityWithInventory implements Tickable
 {
@@ -118,7 +119,7 @@ public class BasicGeneratorBlockEntity extends BlockEntityWithInventory implemen
 
         if (getStoredEnergy() > 0) {
             for (Direction side : Direction.values()) {
-                BasicEnergyStorageBlockEntity blockEntity = (BasicEnergyStorageBlockEntity) getWorld().getBlockEntity(getPos().offset(side));
+                BlockEntityWithEnergy blockEntity = (BlockEntityWithEnergy) Objects.requireNonNull(getWorld()).getBlockEntity(getPos().offset(side));
                 if (blockEntity == null || !blockEntity.canReceiveEnergy())
                     continue;
                 double energyToTransfer = Math.min(getMaxOutput(), getStoredEnergy());

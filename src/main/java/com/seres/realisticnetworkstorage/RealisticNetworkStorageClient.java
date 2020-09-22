@@ -25,10 +25,12 @@
 package com.seres.realisticnetworkstorage;
 
 import com.seres.realisticnetworkstorage.gui.RNSScreens;
-import com.seres.realisticnetworkstorage.gui.basicenergystorage.BasicEnergyStorageContainerScreen;
 import com.seres.realisticnetworkstorage.gui.basicenergystorage.BasicEnergyStorageController;
+import com.seres.realisticnetworkstorage.gui.basicenergystorage.BasicEnergyStorageScreen;
 import com.seres.realisticnetworkstorage.gui.basicgenerator.BasicGeneratorController;
 import com.seres.realisticnetworkstorage.gui.basicgenerator.BasicGeneratorScreen;
+import com.seres.realisticnetworkstorage.gui.diskaccessor.DiskAccessorController;
+import com.seres.realisticnetworkstorage.gui.diskaccessor.DiskAccessorScreen;
 import com.seres.realisticnetworkstorage.gui.diskcontroller.DiskControllerGuiController;
 import com.seres.realisticnetworkstorage.gui.diskcontroller.DiskControllerScreen;
 import com.seres.realisticnetworkstorage.network.ClientboundPackets;
@@ -45,11 +47,13 @@ public class RealisticNetworkStorageClient implements ClientModInitializer
     public void onInitializeClient()
     {
         ClientboundPackets.init();
-        ScreenRegistry.<BasicEnergyStorageController, BasicEnergyStorageContainerScreen>register
-                (RNSScreens.basicEnergyStorageScreen, (desc, inventory, title) -> new BasicEnergyStorageContainerScreen(desc, inventory.player, title));
+        ScreenRegistry.<BasicEnergyStorageController, BasicEnergyStorageScreen>register
+                (RNSScreens.basicEnergyStorageScreen, (desc, inventory, title) -> new BasicEnergyStorageScreen(desc, inventory.player, title));
         ScreenRegistry.<BasicGeneratorController, BasicGeneratorScreen>register
                 (RNSScreens.basicGeneratorScreen, (desc, inventory, title) -> new BasicGeneratorScreen(desc, inventory.player, title));
         ScreenRegistry.<DiskControllerGuiController, DiskControllerScreen>register
                 (RNSScreens.diskControllerScreen, (desc, inventory, title) -> new DiskControllerScreen(desc, inventory.player, title));
+        ScreenRegistry.<DiskAccessorController, DiskAccessorScreen>register
+                (RNSScreens.diskAccessorScreen, (desc, inventory, title) -> new DiskAccessorScreen(desc, inventory.player, title));
     }
 }

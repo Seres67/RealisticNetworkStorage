@@ -48,7 +48,6 @@ public class BasicEnergyStorageController extends SyncedGuiDescription
         bar.validate(this);
         root.add(bar, 8, 1, 1, 3);
         root.add(this.createPlayerInventoryPanel(), 0, 4);
-
         root.validate(this);
     }
 }

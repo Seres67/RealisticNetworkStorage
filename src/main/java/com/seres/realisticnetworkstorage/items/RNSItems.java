@@ -24,8 +24,12 @@
 
 package com.seres.realisticnetworkstorage.items;
 
+import com.seres.realisticnetworkstorage.items.disks.CompactDisk;
+import com.seres.realisticnetworkstorage.items.disks.FloppyDisk;
+
 public class RNSItems
 {
     public static EnergyTransferStick ENERGY_TRANSFER_STICK;
-    public static BaseDiskItem BASE_DISK;
+    public static FloppyDisk FLOPPY_DISK;
+    public static CompactDisk COMPACT_DISK;
 }

@@ -45,7 +45,7 @@ public class BasicGeneratorController extends SyncedGuiDescription
         Texture bg = new Texture(new Identifier(RealisticNetworkStorage.MODID, "textures/gui/bar.png"));
         Texture b = new Texture(new Identifier(RealisticNetworkStorage.MODID, "textures/gui/bar_mark.png"));
         WBar bar = new WBar(bg, b, 0, 1, WBar.Direction.UP);
-        bar.withTooltip("gui.realisticnetworkstorage.energy_generator.tooltip");
+        bar.withTooltip("gui.realisticnetworkstorage.energy_storage.tooltip");
         bar.validate(this);
         root.add(bar, 8, 1, 1, 3);
         WItemSlot slot = WItemSlot.of(blockInventory, 0);

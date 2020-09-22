@@ -29,4 +29,5 @@ public class RNSBlocks
     public static BasicEnergyStorage BASIC_ENERGY_STORAGE;
     public static BasicGeneratorBlock BASIC_GENERATOR;
     public static DiskController DISK_CONTROLLER;
+    public static DiskAccessor DISK_ACCESSOR;
 }

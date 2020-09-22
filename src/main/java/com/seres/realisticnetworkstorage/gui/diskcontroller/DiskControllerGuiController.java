@@ -2,7 +2,7 @@ package com.seres.realisticnetworkstorage.gui.diskcontroller;
 
 import com.seres.realisticnetworkstorage.RealisticNetworkStorage;
 import com.seres.realisticnetworkstorage.gui.RNSScreens;
-import com.seres.realisticnetworkstorage.items.BaseDiskItem;
+import com.seres.realisticnetworkstorage.items.disks.BaseDiskItem;
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WBar;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;

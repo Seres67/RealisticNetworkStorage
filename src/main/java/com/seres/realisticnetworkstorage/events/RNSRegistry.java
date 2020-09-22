@@ -25,22 +25,18 @@
 package com.seres.realisticnetworkstorage.events;
 
 import com.seres.realisticnetworkstorage.RealisticNetworkStorage;
-import com.seres.realisticnetworkstorage.blockentities.BasicEnergyStorageBlockEntity;
-import com.seres.realisticnetworkstorage.blockentities.BasicGeneratorBlockEntity;
-import com.seres.realisticnetworkstorage.blockentities.DiskControllerBlockEntity;
-import com.seres.realisticnetworkstorage.blockentities.RNSBlockEntities;
-import com.seres.realisticnetworkstorage.blocks.BasicEnergyStorage;
-import com.seres.realisticnetworkstorage.blocks.BasicGeneratorBlock;
-import com.seres.realisticnetworkstorage.blocks.DiskController;
-import com.seres.realisticnetworkstorage.blocks.RNSBlocks;
+import com.seres.realisticnetworkstorage.blockentities.*;
+import com.seres.realisticnetworkstorage.blocks.*;
 import com.seres.realisticnetworkstorage.energy.EnergyTier;
 import com.seres.realisticnetworkstorage.gui.RNSScreens;
 import com.seres.realisticnetworkstorage.gui.basicenergystorage.BasicEnergyStorageController;
 import com.seres.realisticnetworkstorage.gui.basicgenerator.BasicGeneratorController;
+import com.seres.realisticnetworkstorage.gui.diskaccessor.DiskAccessorController;
 import com.seres.realisticnetworkstorage.gui.diskcontroller.DiskControllerGuiController;
-import com.seres.realisticnetworkstorage.items.BaseDiskItem;
 import com.seres.realisticnetworkstorage.items.EnergyTransferStick;
 import com.seres.realisticnetworkstorage.items.RNSItems;
+import com.seres.realisticnetworkstorage.items.disks.CompactDisk;
+import com.seres.realisticnetworkstorage.items.disks.FloppyDisk;
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -73,20 +69,15 @@ public class RNSRegistry
         registerBlock(RNSBlocks.BASIC_ENERGY_STORAGE = new BasicEnergyStorage(FabricBlockSettings.of(Material.METAL), EnergyTier.MID), "basic_energy_storage");
         registerBlock(RNSBlocks.BASIC_GENERATOR = new BasicGeneratorBlock(FabricBlockSettings.of(Material.METAL), EnergyTier.LOW), "basic_generator");
         registerBlock(RNSBlocks.DISK_CONTROLLER = new DiskController(FabricBlockSettings.of(Material.METAL), EnergyTier.LOW), "disk_controller");
+        registerBlock(RNSBlocks.DISK_ACCESSOR = new DiskAccessor(FabricBlockSettings.of(Material.METAL), EnergyTier.LOW), "disk_accessor");
     }
 
     private static void registerItems()
     {
         Item.Settings settings = new FabricItemSettings().group(RealisticNetworkStorage.ITEMGROUP);
         registerItem(RNSItems.ENERGY_TRANSFER_STICK = new EnergyTransferStick(settings, 1000, EnergyTier.HIGH), "energy_transfer_stick");
-        registerItem(RNSItems.BASE_DISK = new BaseDiskItem(settings.maxCount(1))
-        {
-            @Override
-            public int getSize()
-            {
-                return 0;
-            }
-        }, "base_disk");
+        registerItem(RNSItems.FLOPPY_DISK = new FloppyDisk(settings.maxCount(1)), "floppy_disk");
+        registerItem(RNSItems.COMPACT_DISK = new CompactDisk(settings.maxCount(1)), "compact_disk");
     }
 
     private static void registerBlockEntities()
@@ -94,6 +85,7 @@ public class RNSRegistry
         RNSBlockEntities.BASIC_ENERGY_STORAGE = registerBlockEntity(() -> new BasicEnergyStorageBlockEntity(EnergyTier.LOW), ":basic_energy_storage_block_entity", RNSBlocks.BASIC_ENERGY_STORAGE);
         RNSBlockEntities.BASIC_GENERATOR = registerBlockEntity(() -> new BasicGeneratorBlockEntity(EnergyTier.LOW), ":basic_generator_block_entity", RNSBlocks.BASIC_GENERATOR);
         RNSBlockEntities.DISK_CONTROLLER = registerBlockEntity(() -> new DiskControllerBlockEntity(EnergyTier.LOW), ":disk_controller_block_entity", RNSBlocks.DISK_CONTROLLER);
+        RNSBlockEntities.DISK_ACCESSOR = registerBlockEntity(() -> new DiskAccessorBlockEntity(EnergyTier.LOW), ":disk_accessor_block_entity", RNSBlocks.DISK_ACCESSOR);
     }
 
     private static void registerScreens()
@@ -101,6 +93,7 @@ public class RNSRegistry
         RNSScreens.basicEnergyStorageScreen = registerScreen("basic_energy_storage", (id, inv) -> new BasicEnergyStorageController(id, inv, ScreenHandlerContext.EMPTY));
         RNSScreens.basicGeneratorScreen = registerScreen("basic_generator", (id, inv) -> new BasicGeneratorController(id, inv, ScreenHandlerContext.EMPTY));
         RNSScreens.diskControllerScreen = registerScreen("disk_controller", (id, inv) -> new DiskControllerGuiController(id, inv, ScreenHandlerContext.EMPTY));
+        RNSScreens.diskAccessorScreen = registerScreen("disk_accessor", (id, inv) -> new DiskAccessorController(id, inv, ScreenHandlerContext.EMPTY));
     }
 
     public static void registerBlock(Block block, String name)

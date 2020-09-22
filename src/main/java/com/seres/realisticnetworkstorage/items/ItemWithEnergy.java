@@ -54,7 +54,7 @@ public class ItemWithEnergy extends Item
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context)
     {
         assert world != null;
-        tooltip.add(new TranslatableText("item.realisticnetworkstorage.basic_energy_item.tooltip", getStoredEnergy(stack), getMaxEnergy()));
+        tooltip.add(new TranslatableText("gui.realisticnetworkstorage.energy_storage.tooltip", getStoredEnergy(stack), getMaxEnergy()));
     }
 
     public double getMaxEnergy()

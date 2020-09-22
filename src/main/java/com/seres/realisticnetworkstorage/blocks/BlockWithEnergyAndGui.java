@@ -26,7 +26,6 @@ package com.seres.realisticnetworkstorage.blocks;
 
 import com.seres.realisticnetworkstorage.blockentities.BlockEntityWithGui;
 import com.seres.realisticnetworkstorage.energy.EnergyTier;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
